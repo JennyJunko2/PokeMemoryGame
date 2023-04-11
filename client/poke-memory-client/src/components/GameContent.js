@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client'
-import PokemonCard from './PokemonCard';
 import StyledGameContentContainer from '../styles/StyledGameContentContainer';
+import PokemonCardsGrid from './PokemonCardsGrid';
 
 const RANDOM_POKEMONS = gql`
   query RandomPokemons($number: Int) {
@@ -24,12 +24,10 @@ const GameContent = () => {
   const { loading, error, data } = useQuery(RANDOM_POKEMONS, {
     variables: { number: 5 }
   })
-
+  
   const originalCards = data?.randomPokemons.slice() ?? []
   const doubledCards = [...originalCards, ...originalCards]
   const shuffledCards = shuffleCards(doubledCards)
-
-  console.log(shuffledCards)
 
   if (loading) {
     return <p>loading...</p>
@@ -37,10 +35,17 @@ const GameContent = () => {
 
   return (
     <StyledGameContentContainer>
-      {shuffledCards?.map((item, index) => {
+      {/* {shuffledCards?.map((item, index) => {
         console.log('index:', index)
-        return <PokemonCard item={item} key={index}/>
-      })}
+        return(
+        <PokemonCard
+          item={item} 
+          key={index}
+          flippedCards={flippedCards}
+          setFlippedCards={setFlippedCards}
+        />)
+      })} */}
+      <PokemonCardsGrid shuffledCards={shuffledCards}/>
     </StyledGameContentContainer>
   )
 }
