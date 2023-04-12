@@ -1,11 +1,11 @@
 import GameContent from "../components/GameContent";
-import StyledRootContainer from "../styles/StyledRootContainer";
+import Layout from "../components/ui/Layout";
 
 const GamePage = () => {
   return (
-    <StyledRootContainer>
+    <Layout>
       <GameContent />
-    </StyledRootContainer>
+    </Layout>
   );
 }
 
