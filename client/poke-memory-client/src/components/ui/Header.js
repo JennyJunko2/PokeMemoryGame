@@ -20,7 +20,7 @@ const HeaderContainer = styled.div`
 
 const HeaderTitle = styled.div`
   font-size: 2rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, sans-serif;
 `
 
 export default Header

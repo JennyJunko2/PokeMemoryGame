@@ -1,17 +1,10 @@
 import { useCallback, useEffect, useState } from "react"
-import PokemonCard from "./PokemonCard"
 import Confetti from 'react-confetti'
+import PokemonCard from "./PokemonCard"
 
-const PokemonCardsGrid = ({shuffledCards}) => {
-  const [cardsStatus, setCardsStatus] = useState(shuffledCards.map((card, index) => {
-    return {
-      cardKey: index,
-      ...card,
-      status: 'back'
-    }
-  }))
+const PokemonCardsGrid = ({shuffledCards, hasAllCardsMatched, setHasAllCardsMatched}) => {
+  const [cardsStatus, setCardsStatus] = useState(shuffledCards)
   const [flippedCards, setFlippedCards] = useState([])
-  const [message, setMessage] = useState('')
   const [showConfetti, setShowConfetti] = useState(false)
 
   const manageCardsState = useCallback((key, newStatus) => {
@@ -29,14 +22,13 @@ const PokemonCardsGrid = ({shuffledCards}) => {
     if(showConfetti) {
       setTimeout(()=> {
         setShowConfetti(false)
-      }, 5000)
+      }, 7000)
     }
   }, [showConfetti])
 
   useEffect(() => {
     if (flippedCards.length === 2) { // When the pair is ready to judge
       if (flippedCards[0].id === flippedCards[1].id) { // When the pair is a match
-        setMessage('Match')
         setTimeout(() => {
           manageCardsState(flippedCards[0].cardKey, 'finish')
           manageCardsState(flippedCards[1].cardKey, 'finish')
@@ -44,12 +36,10 @@ const PokemonCardsGrid = ({shuffledCards}) => {
 
           if (checkIfGameIsCompleted(cardsStatus)) {
             setShowConfetti(true)
+            setHasAllCardsMatched(true)
           }
         }, 500)
-        console.log('cardsStatus:::',cardsStatus)
-
       } else { // When the pair is not a match
-        setMessage('Wrong...')
         setTimeout(() => {
           manageCardsState(flippedCards[0].cardKey, 'back')
           manageCardsState(flippedCards[1].cardKey, 'back')
@@ -57,16 +47,18 @@ const PokemonCardsGrid = ({shuffledCards}) => {
         }, 500)
       }
     }
-  }, [cardsStatus, checkIfGameIsCompleted, flippedCards, manageCardsState, setMessage])
+  }, [cardsStatus, checkIfGameIsCompleted, flippedCards, manageCardsState, setHasAllCardsMatched])
 
   const flipCard = (card, key) => {
-    setFlippedCards((currentCards) => [...currentCards, card])
-    manageCardsState(key, 'front')
+    if (flippedCards.length < 2) {
+      manageCardsState(key, 'front')
+      setFlippedCards((currentCards) => [...currentCards, card])
+    }
   }
 
   return (
     <>
-    {showConfetti && <Confetti />}    
+    {(hasAllCardsMatched && showConfetti) && <Confetti />}    
     {cardsStatus?.map((item) => {
         return(
         <PokemonCard
@@ -79,7 +71,6 @@ const PokemonCardsGrid = ({shuffledCards}) => {
           cardStatus={item.status}
         />)
       })}
-      <div>{message}</div>
     </>
   )
 }
