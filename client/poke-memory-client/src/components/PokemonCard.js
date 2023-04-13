@@ -12,10 +12,9 @@ const PokemonCard = ({
 }) => {
 
   const handleFlip = () => {
-    if (cardStatus === 'finish') {
-      return
+    if (cardStatus === 'back') {
+      flipCard(item, index)
     }
-    flipCard(item, index)
   }
 
   return (
