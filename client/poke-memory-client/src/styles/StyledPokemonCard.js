@@ -3,7 +3,7 @@ import { Colors } from "./colors";
 
 const StyledPokemonCard = styled.div`
   width: calc(100%/5 - 1em);
-  height: 330px;
+  height: 300px;
   margin-top: 0.5rem;
   margin-right: 1rem;
   display: flex;
