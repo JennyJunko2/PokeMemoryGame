@@ -17,10 +17,11 @@ async function startApolloServer() {
           pokemonAPI: new PokemonAPI()
         }
       }
+    },
+    listen: {
+      port: process.env.PORT || 4000
     }
   });
-
-  console.log(`Server is running at ${url}`);
 }
 
 startApolloServer();
