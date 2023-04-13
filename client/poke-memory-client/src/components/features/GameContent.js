@@ -1,9 +1,10 @@
 import { gql, useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
-import StyledButtonAndTimerContainer from '../styles/StyledButtonAndTimerContainer';
-import StyledGameContentContainer from '../styles/StyledGameContentContainer';
+import StyledGameContentContainer from '../../styles/StyledGameContentContainer';
+import { shuffleCards } from '../../utils/helpers';
+import Text from '../ui/Text';
+import GameTopSection from './GameTopSection';
 import PokemonCardsGrid from './PokemonCardsGrid';
-import Button from './ui/Button';
 
 const RANDOM_POKEMONS = gql`
   query RandomPokemons($number: Int) {
@@ -14,14 +15,6 @@ const RANDOM_POKEMONS = gql`
     }
   }
 `
-
-const shuffleCards = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array
-}
 
 const GameContent = () => {
   const { loading, data } = useQuery(RANDOM_POKEMONS, {
@@ -60,19 +53,18 @@ const GameContent = () => {
   }
 
   if (loading) {
-    return <p style={{ fontSize: '1rem', fontFamily: 'system-ui'}}>Shuffling Pokemon cards...</p>
+    return <Text>Shuffling Pokemon cards...</Text>
   }
 
   return (
     <>
-      {
-        readyToPlay
-        ? <Button title={'START GAME'} onClick={onGameStart}/>
-        : <StyledButtonAndTimerContainer>
-          <Button title={'TRY AGAIN'} onClick={onPlayAgain}/>
-          <div className='timer'>{(counter && !hasAllCardsMatched) ? `Time Left: ${counter}` : null}</div>
-        </StyledButtonAndTimerContainer>
-      }
+      <GameTopSection
+        readyToPlay={readyToPlay}
+        counter={counter}
+        hasAllCardsMatched={hasAllCardsMatched}
+        onGameStart={onGameStart}
+        onPlayAgain={onPlayAgain}
+      />
       {
         <StyledGameContentContainer disabled={overlayType}>
           {overlayType === 'gameOverOverlay' && <p className='gameOverText'>Game Over</p>}          

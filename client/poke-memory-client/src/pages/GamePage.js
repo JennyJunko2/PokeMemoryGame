@@ -1,4 +1,4 @@
-import GameContent from "../components/GameContent";
+import GameContent from "../components/features/GameContent";
 import Layout from "../components/ui/Layout";
 
 const GamePage = () => {

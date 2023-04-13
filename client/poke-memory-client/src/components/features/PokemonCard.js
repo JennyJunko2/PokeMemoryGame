@@ -1,8 +1,6 @@
-import StyledPokemonCard from "../styles/StyledPokemonCard"
-
-const makeFirstLetterUpper = (words) => {
-  return words.charAt(0).toUpperCase() + words.slice(1)
-}
+import StyledPokemonCard from '../../styles/StyledPokemonCard'
+import Text from "../ui/Text"
+import { makeFirstLetterUpper } from "../../utils/helpers"
 
 const PokemonCard = ({
   item,
@@ -20,7 +18,9 @@ const PokemonCard = ({
   return (
     <StyledPokemonCard temp={cardStatus} onClick={handleFlip}>
       <img src={item.image} alt={item.name}/>
-      <p>{makeFirstLetterUpper(item.name)}</p>
+      <Text size='16px' fontWeight='bold'>
+        {makeFirstLetterUpper(item.name)}
+      </Text>
     </StyledPokemonCard>
   )
 }

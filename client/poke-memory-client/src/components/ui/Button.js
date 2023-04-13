@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Colors } from "../../styles/colors"
 
 const Button = ({title, onClick}) => {
   return (
@@ -7,7 +8,7 @@ const Button = ({title, onClick}) => {
 }
 
 const StyledButton = styled.button`
-  background-color: #E54222;
+  background-color: ${Colors.pokeRed};
   color: white;
   border-radius: 5px;
   padding: 10px;

@@ -14,7 +14,6 @@ const StyledGameContentContainer = styled.div`
   ${({disabled}) => disabled === 'gameOverOverlay'  && css`
     pointer-events: none;
     opacity: 0.7;
-    content: attr('Game Over');
   `}
 
   .gameOverText {

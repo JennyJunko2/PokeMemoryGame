@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Colors } from "./colors"
 
 const StyledButtonAndTimerContainer = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ const StyledButtonAndTimerContainer = styled.div`
     position: absolute;
     right: 0;
     font-size: 1rem;
-    color: #E54222;
+    color: ${Colors.pokeRed};
     font-family: system-ui, sans-serif;
     font-weight: bold;
   }

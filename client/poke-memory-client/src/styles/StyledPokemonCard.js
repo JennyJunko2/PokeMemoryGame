@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { Colors } from "./colors";
 
 const StyledPokemonCard = styled.div`
   width: calc(100%/5 - 1em);
@@ -11,7 +12,7 @@ const StyledPokemonCard = styled.div`
   align-items: center;
   border-radius: 10px;
   box-sizing: border-box;
-  border: 10px solid #3761A8;
+  border: 10px solid ${Colors.pokeBlue};
 
   ${({temp}) => temp === 'back' && css`
     background-color: #FECA1B;
@@ -28,7 +29,7 @@ const StyledPokemonCard = styled.div`
   `}
 
   ${({temp}) => temp === 'finish' && css`
-    background-color: #c0c0c0;
+    background-color: ${Colors.grayBackground};
     opacity: 0.5;
   `}
 

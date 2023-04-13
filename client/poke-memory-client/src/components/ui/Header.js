@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Colors } from "../../styles/colors"
 
 const Header = () => {
   return (
@@ -14,7 +15,7 @@ const HeaderContainer = styled.div`
   align-items: center;
   justify-content: center;
   color: white;
-  background-color: #3761A8;
+  background-color: ${Colors.pokeBlue};
   min-height: 80px;
 `
 
@@ -24,7 +25,3 @@ const HeaderTitle = styled.div`
 `
 
 export default Header
-
-// red: #E54222
-// blue: #3761A8
-// yellow: #FECA1B
